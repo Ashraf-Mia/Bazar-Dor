@@ -17,7 +17,13 @@ const Banner = () => {
         </p>
         <button className="btn">সব পণ্য দেখুন</button>
       </div>
-      <Image src={"/bazar-hero.png"} height={263} width={315} alt=""></Image>
+      <Image
+        src={"/bazar-hero.png"}
+        height={263}
+        width={315}
+        alt="hero-image"
+        loading="eager"
+      ></Image>
     </div>
   );
 };

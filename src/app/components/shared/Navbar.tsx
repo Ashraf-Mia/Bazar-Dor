@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import NavLinks from "./NavLinks";
-import CurrentDate from "./CurrentDate";
+import NavLinks from "../NavLinks";
+import CurrentDate from "../CurrentDate";
 import { Suspense } from "react";
 
 const Navbar = () => {
