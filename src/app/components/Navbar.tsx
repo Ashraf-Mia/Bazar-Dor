@@ -1,12 +1,10 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
+import NavLinks from "./NavLinks";
+import CurrentDate from "./CurrentDate";
+import { Suspense } from "react";
 
 const Navbar = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
-
   return (
     <div className=" container mx-auto">
       <div className="  justify-between py-4 flex ">
@@ -22,7 +20,8 @@ const Navbar = () => {
           </Link>
           <div>
             <h2 className=" text-2xl font-bold">বাজার দর</h2>
-            <span className="">{date}</span>
+
+            <CurrentDate />
           </div>
         </div>
 
@@ -32,7 +31,9 @@ const Navbar = () => {
         </div>
       </div>
       <h2 className="bg-base-100 border-y border-base-300 py-2">
-        ক্যাটাগরি মেনু
+        <Suspense fallback={<div>Loading...</div>}>
+          <NavLinks />
+        </Suspense>
       </h2>
     </div>
   );
