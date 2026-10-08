@@ -10,7 +10,8 @@ interface ICategories {
 
 const NavLinks = async () => {
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/categories",
+    // "https://api.api-store.workers.dev/api/bazardor/categories",
+    "https://api.abcz.workers.dev/api/bazardor/categories",
   );
   const data: ICategories[] = await res.json();
   //   console.log("data form", data);
@@ -18,7 +19,7 @@ const NavLinks = async () => {
   return (
     <div className="flex gap-8 ">
       {data.map((d, i) => (
-        <Link href={"/"} className="flex" key={i}>
+        <Link href={`/category/${d.slug}`} className="flex" key={i}>
           <span>{d.icon}</span>
           <p>{d.nameBn}</p>
         </Link>

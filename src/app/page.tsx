@@ -1,10 +1,12 @@
 import Banner from "./components/Banner";
 import ItemCard from "./components/shared/ItemCard";
-import { IMarketItem } from "./types/IAllItem";
+import { IMarketItem } from "./types/IMarketItem";
 
 export default async function Home() {
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
+    // "https://api.api-store.workers.dev/api/bazardor/products",
+    "https://api.abcz.workers.dev/api/bazardor/products",
+    { cache: "force-cache" },
   );
   const allItem: IMarketItem[] = await res.json();
   // console.log("data from card", allItem);

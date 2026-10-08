@@ -2,7 +2,7 @@ export interface IMarketItem {
   id: number;
   category: string;
   categoryIcon: string;
-    categoryNameBn: string;
+  categoryNameBn: string;
   nameBn: string;
   image: string;
   lastMonth: number;

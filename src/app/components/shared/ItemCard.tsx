@@ -1,4 +1,4 @@
-import { IMarketItem } from "@/app/types/IAllItem";
+import { IMarketItem } from "@/app/types/IMarketItem";
 import React from "react";
 interface IAllItem {
   item: IMarketItem;
