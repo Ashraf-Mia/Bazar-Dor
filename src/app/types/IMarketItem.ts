@@ -8,7 +8,7 @@ export interface IMarketItem {
   lastMonth: number;
   lastWeek: number;
   change: {
-    dir: "up" | "down" | "flat"
+    dir: "up" | "down" | "flat";
     pct: number;
   };
   markets: {
@@ -17,8 +17,8 @@ export interface IMarketItem {
     min: number;
     max: number;
   }[];
- slug: string;
- today: string;
- unit: string;
- yesterday: number;
+  slug: string;
+  today: number;
+  unit: string;
+  yesterday: number;
 }
