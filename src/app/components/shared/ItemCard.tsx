@@ -4,7 +4,7 @@ interface IAllItem {
   item: IMarketItem;
 }
 const ItemCard = async ({ item }: IAllItem) => {
-  console.log("item", item);
+  // console.log("item", item);
   const isUp = item.change.dir === "up";
   const isZero = item.change.pct === 0 || item.change.dir === "flat";
   return (

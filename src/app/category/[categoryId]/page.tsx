@@ -1,19 +1,20 @@
-const getCategoryItem = async (categoryId) => {
-  const res = await fetch(
-    `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`,
-  );
-  const data = await res.json();
-  return data;
-};
+import { Suspense } from "react";
+import CategoryContent from "./CategoryContet";
 
-const CategoryItem = async ({ params }) => {
+interface PageProps {
+  params: Promise<{
+    categoryId: string;
+  }>;
+}
+
+const CategoryItem = async ({ params }: PageProps) => {
   const { categoryId } = await params;
-  console.log(categoryId);
 
-  const categoryItem = await getCategoryItem(categoryId);
-  console.log(categoryItem);
-
-  return <div>product of a category..</div>;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CategoryContent categoryId={categoryId} />
+    </Suspense>
+  );
 };
 
 export default CategoryItem;
