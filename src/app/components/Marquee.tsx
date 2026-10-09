@@ -1,6 +1,7 @@
 import MarqueeText from "react-marquee-text";
 import { IMarketItem } from "../types/IMarketItem";
 import Link from "next/link";
+import { toBn, unitBn } from "../utils/bangla";
 
 const Marquee = async () => {
   const res = await fetch(
@@ -14,14 +15,14 @@ const Marquee = async () => {
   const fiterdItem = allItem.filter(
     (f) => f.change.pct !== 0 || f.change.dir !== "flat",
   );
-  console.log("filtared item", fiterdItem);
+  //   console.log("filtared item", fiterdItem);
 
   return (
     <div className="bg-base-100 border border-base-300 py-2 mb-4">
       <MarqueeText duration={15} direction="right">
         {fiterdItem.map((item) => (
           <Link
-            href={`category/${item.id}`}
+            href={`items/${item.id}`}
             key={item.id}
             className=" hover:underline"
           >
@@ -29,7 +30,7 @@ const Marquee = async () => {
               <span>{item.categoryIcon}</span>
               <h2 className="pr-2">{item.nameBn}</h2>
               <p>
-                {item.today}টাকা/{item.unit}
+                {toBn(item.today)}টাকা/{unitBn(item.unit)}
               </p>
               <div
                 className={`flex items-center gap-1.5  ${item.change.pct === 0 || item.change.dir === "flat" ? " text-gray-700" : item.change.dir === "up" ? " text-red-600" : " text-green-600"}`}
@@ -41,7 +42,7 @@ const Marquee = async () => {
                       ? "▲"
                       : "▼"}
                 </span>
-                <span>{item.change.pct}%</span>
+                <span>{toBn(item.change.pct)}%</span>
               </div>
               <span className="pr-5"></span>
             </div>

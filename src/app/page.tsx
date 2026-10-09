@@ -2,6 +2,7 @@ import Banner from "./components/Banner";
 
 import ItemCard from "./components/shared/ItemCard";
 import { IMarketItem } from "./types/IMarketItem";
+import { toBn } from "./utils/bangla";
 
 export default async function Home() {
   const res = await fetch(
@@ -18,7 +19,7 @@ export default async function Home() {
 
       <h2 className=" text-3xl font-bold">সব পণ্য</h2>
       <p className=" text-sm text-gray-700 pb-2">
-        মোট <span>{allItem.length}</span> টি পণ্য দেখানো হচ্ছে
+        মোট <span>{toBn(allItem.length)}</span> টি পণ্য দেখানো হচ্ছে
       </p>
       <div className=" grid grid-cols-3 gap-5 pb-9 ">
         {allItem.map((item) => (
