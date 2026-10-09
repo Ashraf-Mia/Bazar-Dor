@@ -2,13 +2,12 @@ import MarqueeText from "react-marquee-text";
 import { IMarketItem } from "../types/IMarketItem";
 import Link from "next/link";
 import { toBn, unitBn } from "../utils/bangla";
+import baseUrl from "@/services/baseUrl";
 
 const Marquee = async () => {
-  const res = await fetch(
-    // "https://api.api-store.workers.dev/api/bazardor/products",
-    "https://api.abcz.workers.dev/api/bazardor/products",
-    { cache: "force-cache" },
-  );
+  const res = await fetch(`${baseUrl}/api/bazardor/products`, {
+    cache: "force-cache",
+  });
   const allItem: IMarketItem[] = await res.json();
   //   console.log("allitem form marquee", allItem);
 

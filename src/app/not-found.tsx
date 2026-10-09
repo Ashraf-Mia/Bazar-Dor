@@ -3,7 +3,7 @@ import React from "react";
 
 const notFound = () => {
   return (
-    <div className=" flex flex-col justify-center items-center min-h-screen">
+    <div className=" flex flex-col justify-center items-center pt-6">
       <span className="text-[4rem] font-bold leading-none text-green-600 sm:text-[7rem]">
         🧺
       </span>

@@ -1,3 +1,4 @@
+import baseUrl from "@/services/baseUrl";
 import Banner from "./components/Banner";
 
 import ItemCard from "./components/shared/ItemCard";
@@ -6,8 +7,8 @@ import { toBn } from "./utils/bangla";
 
 export default async function Home() {
   const res = await fetch(
-    // "https://api.api-store.workers.dev/api/bazardor/products",
-    "https://api.abcz.workers.dev/api/bazardor/products",
+    `${baseUrl}/api/bazardor/products`,
+
     { cache: "force-cache" },
   );
   const allItem: IMarketItem[] = await res.json();

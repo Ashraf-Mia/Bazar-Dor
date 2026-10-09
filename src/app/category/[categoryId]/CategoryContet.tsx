@@ -1,9 +1,10 @@
 import ItemCard from "@/app/components/shared/ItemCard";
 import { IMarketItem } from "@/app/types/IMarketItem";
+import baseUrl from "@/services/baseUrl";
 
 const getCategoryItem = async (categoryId: string) => {
   const res = await fetch(
-    `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`,
+    `${baseUrl}/api/bazardor/products?category=${categoryId}`,
     { cache: "force-cache" },
   );
 
