@@ -2,6 +2,7 @@ import { IMarketItem } from "@/app/types/IMarketItem";
 import { toBn, unitBn } from "@/app/utils/bangla";
 import baseUrl from "@/services/baseUrl";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import React from "react";
 
@@ -9,9 +10,17 @@ const ItemDetails = async ({ params }: { params: { itemId: string } }) => {
   const { itemId } = await params;
 
   const res = await fetch(`${baseUrl}/api/bazardor/products/${itemId}`);
-  const data: IMarketItem = await res.json();
-  console.log("data by id", data);
 
+  if (!res.ok) {
+    notFound();
+  }
+
+  const data: IMarketItem = await res.json();
+  // console.log("data by id", data);
+
+  if (!data || !data.nameBn) {
+    notFound();
+  }
   const diff = data.today - data.yesterday;
   const treand = diff > 0 ? "বেড়েছে" : diff < 0 ? "কমেছে" : "অপরিবর্তিত";
 
