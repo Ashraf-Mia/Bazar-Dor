@@ -75,15 +75,18 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className=" flex flex-col justify-center items-center ">
+    <div className=" flex flex-col justify-center items-center px-4 ">
       <h2 className="text-2xl font-bold  pt-4 text-center">
         অ্যকাউন্ট তৈরি করুন{" "}
       </h2>
-      <p className=" text-sm font-medium text-black/40 pb-4">
+      <p className=" text-sm font-medium text-black/40 pb-4 text-cente">
         বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
       </p>
-      <form className=" flex justify-center" onSubmit={onSubmit}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-100 border p-4">
+      <form
+        className=" flex justify-center w-full max-w-md"
+        onSubmit={onSubmit}
+      >
+        <fieldset className=" fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
           <label className="label">নাম</label>
           <input
             name="name"
@@ -132,11 +135,11 @@ const SignUpPage = () => {
           </button>
         </fieldset>
       </form>
-      <div>
+      <div className=" w-full max-w-md">
         <span className=" flex justify-center mt-3 font-bold">
           Or, sign up with
         </span>
-        <div className=" text-center flex justify-center gap-4 pt-3">
+        <div className=" text-center flex flex-col gap-3 pt-3 sm:flex-row sm:justify-center sm:gap-4">
           <button
             onClick={handleGoogleSignIn}
             className="btn bg-white text-black border-[#e5e5e5]"

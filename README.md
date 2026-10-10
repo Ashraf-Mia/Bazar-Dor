@@ -4,8 +4,8 @@ BazarDor is a website where users can check the prices of daily products. Users 
 
 ## Live Website
 
-- Live Link: YOUR_LIVE_WEBSITE_URL
-- GitHub Repository: YOUR_GITHUB_REPOSITORY_URL
+- Live Link: https://bazar-dor-neon.vercel.app/
+- GitHub Repository: https://github.com/Ashraf-Mia/Bazar-Dor
 
 ## Features
 
