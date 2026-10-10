@@ -31,7 +31,7 @@ const UserInfo = () => {
               </span>
             )}
             <span className=" font-medium">{user.name}</span>
-            <span className=" text-xs">▾</span>
+            <span className=" text-2xl">▾</span>
           </button>
           {open && (
             <>

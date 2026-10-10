@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         <Marquee />
         <main className=" flex-1">{children}</main>
-        <ToastContainer />
+        <ToastContainer position="top-center" autoClose={5000} />
         <Footer />
       </body>
     </html>
