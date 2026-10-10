@@ -3,6 +3,7 @@ import Link from "next/link";
 import NavLinks from "../NavLinks";
 import CurrentDate from "../CurrentDate";
 import { Suspense } from "react";
+import UserInfo from "../UserInfo";
 
 const Navbar = () => {
   return (
@@ -25,10 +26,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className=" flex gap-2">
-          <button className="btn btn-success">সাইন ইন</button>
-          <button className="btn btn-outline">সাইন আপ</button>
-        </div>
+        <UserInfo />
       </div>
       <h2 className="bg-base-100 border-y border-base-300 py-2">
         <Suspense fallback={<div>Loading...</div>}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { signIn } from "@/lib/auth-client";
+import Link from "next/link";
 
 import { toast } from "react-toastify";
 
@@ -39,17 +40,18 @@ const SignInPage = () => {
     });
   };
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-red-700 py-4 text-center">
-        সাইন ইন
-      </h2>
+    <div className=" flex flex-col justify-center items-center">
+      <h2 className="text-2xl font-bold pt-4 text-center">সাইন ইন</h2>
+      <p className=" text-sm font-medium text-black/40 pb-4">
+        বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
+      </p>
       <form onSubmit={onSubmit}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-100 border p-4">
           <label className="label">ইমেইল</label>
           <input
             name="email"
             type="email"
-            className="input"
+            className="input w-91"
             placeholder="Email"
           />
 
@@ -57,13 +59,13 @@ const SignInPage = () => {
           <input
             name="password"
             type="password"
-            className="input"
+            className="input w-91"
             placeholder="Password"
           />
 
           <button
             type="submit"
-            className="btn bg-red-700 hover:bg-red-800 text-white mt-4"
+            className="btn bg-green-700 hover:bg-green-800 text-white mt-4"
           >
             সাইন ইন করুন
           </button>
@@ -73,7 +75,7 @@ const SignInPage = () => {
         <span className=" flex justify-center mt-3 font-bold">
           Or, sign up with
         </span>
-        <div className=" text-center">
+        <div className=" text-center pt-3 flex gap-4">
           <button
             onClick={handleGoogleSignIn}
             className="btn bg-white text-black border-[#e5e5e5]"
@@ -126,6 +128,15 @@ const SignInPage = () => {
             Login with GitHub
           </button>
         </div>
+        <p className=" text-center pt-4">
+          অ্যকাউন্ট নেই?{" "}
+          <Link href="/sign-up" className=" text-green-600">
+            সাইন আপ করুন
+          </Link>
+        </p>
+        <Link href="/" className=" text-black/50 flex justify-center pt-4">
+          ← হোম পেজে ফিরে যান
+        </Link>
       </div>
     </div>
   );

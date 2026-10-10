@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient, signIn } from "@/lib/auth-client";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { toast } from "react-toastify";
@@ -13,23 +14,53 @@ const SignUpPage = () => {
     const user = Object.fromEntries(formData.entries()) as {
       name: string;
       email: string;
+      image: string;
       password: string;
+      confirmPassword: string;
     };
+
+    if (user.password !== user.confirmPassword) {
+      toast.warning("পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড মিলছে না");
+      return;
+    }
+
+    if (!user.password || user.password.length < 8) {
+      toast.warning("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
+      return;
+    }
+
+    const hasUpperCase = /[A-Z]/.test(user.password);
+    if (!hasUpperCase) {
+      toast.warning("পাসওয়ার্ডে কমপক্ষে একটি বড় হাতের অক্ষর (A-Z) থাকতে হবে!");
+      return;
+    }
+
+    const hasLowerCase = /[a-z]/.test(user.password);
+    if (!hasLowerCase) {
+      toast.warning(
+        "পাসওয়ার্ডে কমপক্ষে একটি ছোট হাতের অক্ষর (a-z) থাকতে হবে!",
+      );
+      return;
+    }
 
     const { data, error } = await authClient.signUp.email({
       ...user,
       callbackURL: "/",
     });
 
-    if (data) {
-      console.log(data);
-      redirect("/");
-    }
     if (error) {
       console.log(error);
+      toast.warning(
+        "এই ইমেইল দিয়ে ইতিমধ্যে একটি অ্যকাউন্ট রয়েছে। দয়া করে অন্য ইমেইল ব্যবহার করুন।",
+      );
+      return;
     }
 
-    toast.warning("USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL");
+    if (data) {
+      console.log(data);
+      toast.success("স্বাগতম! আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।");
+      redirect("/");
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -45,28 +76,52 @@ const SignUpPage = () => {
 
   return (
     <div className=" flex flex-col justify-center items-center ">
-      <h2 className="text-2xl font-bold text-red-700 py-4 text-center">
-        সাইন আপ
+      <h2 className="text-2xl font-bold  pt-4 text-center">
+        অ্যকাউন্ট তৈরি করুন{" "}
       </h2>
+      <p className=" text-sm font-medium text-black/40 pb-4">
+        বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
+      </p>
       <form className=" flex justify-center" onSubmit={onSubmit}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-100 border p-4">
           <label className="label">নাম</label>
-          <input name="name" type="text" className="input" placeholder="name" />
+          <input
+            name="name"
+            type="text"
+            className="input w-91"
+            placeholder="যেমন: আশরাফ মিয়া"
+          />
+
+          <label className="label">ছবি</label>
+          <input
+            name="image"
+            type="url"
+            className="input w-91"
+            placeholder="প্রোফাইল ছবির ইমেজ লিংক দিন"
+          />
 
           <label className="label">ইমেইল</label>
           <input
             name="email"
             type="email"
-            className="input"
-            placeholder="Email"
+            className="input w-91"
+            placeholder="you@example.com"
           />
 
           <label className="label">পাসওয়ার্ড</label>
           <input
             name="password"
             type="password"
-            className="input"
-            placeholder="Password"
+            className="input w-91"
+            placeholder="কমপক্ষে ৮ অক্ষর + (একটি বড় ও ছোট হাতের অক্ষর) "
+          />
+
+          <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
+          <input
+            name="confirmPassword"
+            type="password"
+            className="input w-91"
+            placeholder="পুনরায় পাসওয়ার্ডটি লিখুন"
           />
 
           <button
@@ -113,7 +168,7 @@ const SignUpPage = () => {
                 ></path>
               </g>
             </svg>
-            Login with Google
+            Google দিয়ে চালিয়ে যান
           </button>
           <button
             onClick={handleGithubSignIn}
@@ -131,9 +186,18 @@ const SignUpPage = () => {
                 d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
               ></path>
             </svg>
-            Login with GitHub
+            GitHub দিয়ে চালিয়ে যান
           </button>
         </div>
+        <p className=" text-center pt-4">
+          অ্যকাউন্ট আছে?{" "}
+          <Link href="/sign-in" className=" text-green-600">
+            সাইন ইন করুন
+          </Link>
+        </p>
+        <Link href="/" className=" text-black/50 flex justify-center pt-4">
+          ← হোম পেজে ফিরে যান
+        </Link>
       </div>
     </div>
   );
