@@ -25,16 +25,16 @@ export default async function Home() {
     .slice(0, 6);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4">
       <Banner />
 
       {upItems.length > 0 && (
-        <section className=" pb-9">
-          <h2 className=" pb-3 text-3xl font-bold">
-            <span className=" mr-3 text-red-600">▲</span>
+        <section className=" pb-6 sm:pb-9">
+          <h2 className=" pb-3 text-2xl font-bold sm:text-3xl">
+            <span className=" mr-2 text-red-600 sm:mr-3">▲</span>
             আজ দাম বেড়েছে
           </h2>
-          <div className=" grid grid-cols-3 gap-5">
+          <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {upItems.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
@@ -43,12 +43,12 @@ export default async function Home() {
       )}
 
       {downItems.length > 0 && (
-        <section className=" pb-9">
-          <h2 className=" pb-3 text-3xl font-bold">
-            <span className=" mr-3 text-green-600">▼</span>
+        <section className=" pb-6 sm:pb-9">
+          <h2 className=" pb-3 text-2xl font-bold sm:text-3xl">
+            <span className=" mr-2 text-green-600 sm:mr-3">▼</span>
             আজ দাম কমেছে
           </h2>
-          <div className=" grid grid-cols-3 gap-5">
+          <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {downItems.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
@@ -56,12 +56,12 @@ export default async function Home() {
         </section>
       )}
 
-      <section>
-        <h2 className=" text-3xl font-bold">সব পণ্য</h2>
+      <section id="all-items" className=" scroll-mt-4">
+        <h2 className=" text-2xl font-bold sm:text-3xl">সব পণ্য</h2>
         <p className=" text-sm text-gray-700 pb-2">
           মোট <span>{toBn(allItem.length)}</span> টি পণ্য দেখানো হচ্ছে
         </p>
-        <div className=" grid grid-cols-3 gap-5 pb-9 ">
+        <div className=" grid grid-cols-1 gap-4 pb-9 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 ">
           {allItem.map((item) => (
             <ItemCard key={item.id} item={item} />
           ))}

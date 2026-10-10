@@ -5,7 +5,7 @@ import React from "react";
 interface IAllItem {
   item: IMarketItem;
 }
-const ItemCard = async ({ item }: IAllItem) => {
+const ItemCard = ({ item }: IAllItem) => {
   // console.log("item", item);
   const isUp = item.change.dir === "up";
   const isZero = item.change.pct === 0 || item.change.dir === "flat";
